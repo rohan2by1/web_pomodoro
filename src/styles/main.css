@@ -1,0 +1,235 @@
+/* Import in your main.js */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --pomodoro-color: rgb(124, 58, 237);
+  --short-break-color: rgb(56, 189, 156);
+  --long-break-color: rgb(79, 137, 230);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.mode-btn.selected {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Timer progress styles */
+.timer-container {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.timer-progress {
+  background: conic-gradient(var(--pomodoro-color) 0%, transparent 0%);
+  opacity: 0.3;
+  transition: background 0.3s;
+}
+
+/* Pomodoro mode */
+body.pomodoro-mode .timer-progress {
+  background: conic-gradient(var(--pomodoro-color) var(--progress), transparent var(--progress));
+}
+
+/* Short break mode */
+body.short-break-mode .timer-progress {
+  background: conic-gradient(var(--short-break-color) var(--progress), transparent var(--progress));
+}
+
+/* Long break mode */
+body.long-break-mode .timer-progress {
+  background: conic-gradient(var(--long-break-color) var(--progress), transparent var(--progress));
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(124, 58, 237, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+  }
+}
+
+.timer-container.active {
+  animation: pulse 2s infinite;
+}
+
+/* Buttons hover effect */
+.control-btn:hover {
+  transform: translateY(-2px);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+}
+/* Lofi Background Styles */
+.lofi-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.lofi-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(20, 20, 35, 0.8), rgba(20, 20, 40, 0.95));
+  z-index: 1;
+}
+
+.particle-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Add this to create animated particles */
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Lofi color themes */
+body.pomodoro-mode .lofi-overlay {
+  background: linear-gradient(to bottom, rgba(65, 30, 90, 0.8), rgba(20, 20, 40, 0.95));
+}
+
+body.short-break-mode .lofi-overlay {
+  background: linear-gradient(to bottom, rgba(30, 70, 80, 0.8), rgba(20, 30, 50, 0.95));
+}
+
+body.long-break-mode .lofi-overlay {
+  background: linear-gradient(to bottom, rgba(40, 50, 90, 0.8), rgba(20, 25, 45, 0.95));
+}
+
+/* Add a grain effect for that lofi aesthetic */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+.lofi-gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://i.pinimg.com/originals/17/e3/87/17e387a24f3b9c660c10ffe34f36aef0.gif');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+/* Optional: Add the ability to change the GIF based on the mode */
+body.pomodoro-mode .lofi-gif {
+  background-image: url('https://i.pinimg.com/originals/17/e3/87/17e387a24f3b9c660c10ffe34f36aef0.gif');
+}
+
+body.short-break-mode .lofi-gif {
+  background-image: url('https://i.pinimg.com/originals/65/ec/0c/65ec0cf5deed77a24fbed5da2a126045.gif');
+}
+
+body.long-break-mode .lofi-gif {
+  background-image: url('https://i.pinimg.com/originals/be/48/66/be4866e4525a7efb5b60bab170dbc5dd.gif');
+}
+/* Music player visualizer */
+.music-visualizer .bar {
+  width: 2px;
+  background-color: var(--pomodoro-color);
+  height: 3px;
+  border-radius: 1px;
+  transition: height 0.2s ease;
+}
+
+.music-player.playing .music-visualizer .bar {
+  animation: musicBars 1.2s ease-in-out infinite;
+}
+
+.music-player.playing .music-visualizer .bar:nth-child(1) {
+  animation-delay: 0s;
+}
+.music-player.playing .music-visualizer .bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.music-player.playing .music-visualizer .bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.music-player.playing .music-visualizer .bar:nth-child(4) {
+  animation-delay: 0.6s;
+}
+.music-player.playing .music-visualizer .bar:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+@keyframes musicBars {
+  0%, 100% {
+    height: 3px;
+  }
+  50% {
+    height: 12px;
+  }
+}
+
+body.pomodoro-mode .music-visualizer .bar {
+  background-color: var(--pomodoro-color);
+}
+
+body.short-break-mode .music-visualizer .bar {
+  background-color: var(--short-break-color);
+}
+
+body.long-break-mode .music-visualizer .bar {
+  background-color: var(--long-break-color);
+}
+.vhs-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.15;
+}

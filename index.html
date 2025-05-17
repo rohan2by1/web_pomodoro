@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Standard favicon -->
+<link rel="icon" href="favicon.ico" sizes="32x32" type="image/x-icon">
+<!-- For modern browsers supporting PNG -->
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <title>Focus Timer | Pomodoro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body
+    class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen flex flex-col items-center justify-center text-white"
+  >
+    <div class="lofi-background">
+      <div class="particle-container"></div>
+      <div class="lofi-overlay"></div>
+    </div>
+    <div class="container mx-auto px-4 py-10 max-w-md">
+      <h1 class="text-3xl font-bold text-center mb-6 text-white">
+        Focus Timer
+      </h1>
+
+      <!-- Mode Selection -->
+      <div
+        class="bg-gray-800/50 p-2 rounded-xl flex justify-between mb-10 shadow-lg"
+      >
+        <button
+          data-mode="pomodoro"
+          class="mode-btn selected px-4 py-2 rounded-lg font-medium transition-all duration-300"
+        >
+          Focus
+        </button>
+        <button
+          data-mode="short-break"
+          class="mode-btn px-4 py-2 rounded-lg font-medium transition-all duration-300"
+        >
+          Short Break
+        </button>
+        <button
+          data-mode="long-break"
+          class="mode-btn px-4 py-2 rounded-lg font-medium transition-all duration-300"
+        >
+          Long Break
+        </button>
+      </div>
+
+      <!-- Timer Display -->
+      <div
+        class="timer-container bg-gray-800/30 rounded-full w-64 h-64 mx-auto flex items-center justify-center relative mb-10 shadow-2xl"
+      >
+        <div class="timer-progress absolute inset-0 rounded-full"></div>
+        <div class="timer text-6xl font-bold z-10">25:00</div>
+      </div>
+
+      <!-- Control Buttons -->
+      <div class="control-buttons flex justify-center gap-6">
+        <button
+          id="startBtn"
+          class="control-btn bg-indigo-600 hover:bg-indigo-700 px-8 py-3 rounded-lg font-medium transition-all duration-300 shadow-lg"
+        >
+          <i class="fas fa-play mr-2"></i>Start
+        </button>
+        <button
+          id="resetBtn"
+          class="control-btn bg-gray-700 hover:bg-gray-600 px-5 py-3 rounded-lg transition-all duration-300 shadow-lg"
+        >
+          <i class="fas fa-sync-alt"></i>
+        </button>
+        <button
+          id="skipBtn"
+          class="control-btn bg-gray-700 hover:bg-gray-600 px-5 py-3 rounded-lg transition-all duration-300 shadow-lg"
+        >
+          <i class="fas fa-forward"></i>
+        </button>
+      </div>
+
+      <!-- Session Counter -->
+      <div class="session-counter mt-8 text-center text-gray-400">
+        <span class="text-sm"
+          >Sessions completed: <span id="sessionCount">0</span></span
+        >
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
